@@ -21,7 +21,7 @@ Adafruit_StepperMotor *stepper2 = AFMS.getStepper(200, 2);
 
 void setup()
 {  
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println("Serial started");
   AFMS.begin(); // Start the top shield
 
@@ -45,28 +45,28 @@ void handleSerial() {
       Serial.println("Released");
       break;
     case 'a':
-      stepper1->onestep(FORWARD, DOUBLE);
+      stepper1->onestep(FORWARD, SINGLE);
       break;
     case 'd':
-      stepper1->onestep(BACKWARD, DOUBLE);
+      stepper1->onestep(BACKWARD, SINGLE);
       break;
     case 'w':
-      stepper2->onestep(FORWARD, DOUBLE);
+      stepper2->onestep(FORWARD, SINGLE);
       break;
     case 's':
-      stepper2->onestep(BACKWARD, DOUBLE);
+      stepper2->onestep(BACKWARD, SINGLE);
       break;
     case 'f':
-      stepper1->onestep(FORWARD, MICROSTEP);
+      stepper1->onestep(FORWARD, DOUBLE);
       break;
     case 'h':
-      stepper1->onestep(BACKWARD, MICROSTEP);
+      stepper1->onestep(BACKWARD, DOUBLE);
       break;
     case 't':
-      stepper2->onestep(FORWARD, MICROSTEP);
+      stepper2->onestep(FORWARD, DOUBLE);
       break;
     case 'g':
-      stepper2->onestep(BACKWARD, MICROSTEP);
+      stepper2->onestep(BACKWARD, DOUBLE);
       break;
 
     default:

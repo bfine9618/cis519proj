@@ -21,10 +21,12 @@ Adafruit_StepperMotor *stepper2 = AFMS.getStepper(200, 2);
 
 void setup()
 {  
+  //analogReference(EXTERNAL);
   Serial.begin(115200);
-  Serial.println("Serial started");
+  Serial.println("Motor serial started");
   AFMS.begin(); // Start the top shield
-
+  //Serial.println("Motor board started");
+  
   // Uneccessary when using onestep
   //stepper1->setSpeed(1000);
   //stepper2->setSpeed(2000);
@@ -32,7 +34,18 @@ void setup()
 
 void loop()
 {
+
+  //int x = (float)analogRead(A4);
+  //int y = (float)analogRead(A5);
+  //int z = (float)analogRead(A2)-524;
+
+  //Serial.print("x: ");
+  //Serial.print(x);
+  //Serial.print(" y: ");
+  //Serial.println(y);
+
   handleSerial();
+  
 }
 
 void handleSerial() {

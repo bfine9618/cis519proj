@@ -10,7 +10,7 @@ DISPLAYSURF = pygame.display.set_mode((300,300))
 pygame.display.set_caption('Stepper Debugger')
 
 try:
-	ser = Serial('/dev/cu.usbmodem1421', 115200, timeout=2)
+	ser = Serial('/dev/cu.usbmodem1421', 9600, timeout=0)
 except:
 	print('Pixy Cam Not Connected')
 
@@ -25,6 +25,7 @@ print("connected to: " + arduino.portstr)
 
 print(arduino.readline())
 
+count = 0
 
 aDown = False
 dDown = False
@@ -36,7 +37,7 @@ tDown = False
 gDown = False
 
 while True:
-
+	count = count+1
 	# get all the user events
 	for event in pygame.event.get():
 		#if the user wants to quit
@@ -99,21 +100,22 @@ while True:
 	if gDown:
 		arduino.write('g'.encode('utf-8'))
 
-	pygame.display.update()
-
-	try:
-		line = ser.readline()
-		if line:
-			words = str(line).split(' ')
-			if 'width' in str(line):
+	
+	line = ser.readline()
+	if line:
+		words = str(line).split(' ')
+		if 'width' in str(line):
+			try:
 				x_pos = words[7]
 				y_pos = words[9]
-				#print('x: ' + x_pos + '; y: ' + y_pos)
-		else :
-			#print('YOU LOSE')
-	except:
-		None
+			except: 
+				print(words)
+				break
+			print('x: ' + x_pos + '; y: ' + y_pos)
+	else :
+		print('YOU LOSE')
 
+	pygame.display.update()
 
 
 

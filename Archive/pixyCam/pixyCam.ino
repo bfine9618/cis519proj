@@ -56,7 +56,7 @@ void loop()
     {
       for (j=0; j<blocks; j++)
       {
-        sprintf(buf, "  block %d: ", j);
+//        sprintf(buf, "  block %d: ", j);
         Serial.print(buf); 
         pixy.blocks[j].print();
       }

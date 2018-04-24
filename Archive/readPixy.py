@@ -9,6 +9,12 @@ pygame.init()
 DISPLAYSURF = pygame.display.set_mode((300,300))
 pygame.display.set_caption('Stepper Debugger')
 
+ballOnPlateXGoal = 150
+ballOnPlateYGoal = 82
+
+x_pos = '10'
+y_pos = '10'
+
 try:
 	ser = Serial('/dev/cu.usbmodem1421', 9600, timeout=0)
 except:
@@ -106,12 +112,11 @@ while True:
 		words = str(line).split(' ')
 		if 'width' in str(line):
 			try:
-				x_pos = words[7]
-				y_pos = words[9]
-			except: 
-				print(words)
-				break
-			print('x: ' + x_pos + '; y: ' + y_pos)
+				x_pos = int(words[7])
+				y_pos = int(words[9])
+			except (ValueError, IndexError): 
+				pass
+			print('x: ' + str(x_pos) + '; y: ' + str(y_pos))
 	else :
 		print('YOU LOSE')
 

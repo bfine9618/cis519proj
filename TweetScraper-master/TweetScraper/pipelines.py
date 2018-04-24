@@ -6,9 +6,12 @@ import pymongo
 import json
 import os
 import pickle
+from langdetect import detect
+import unicodedata
 
 from TweetScraper.items import Tweet, User
 from TweetScraper.utils import mkdirs
+
 
 
 logger = logging.getLogger(__name__)
@@ -96,5 +99,11 @@ class SaveToFilePipeline(object):
                 item - a dict like object
                 fname - where to save
         '''
-        with open(fname+'.pickle','w') as f:
-            pickle.dump(dict(item), f, protocol=pickle.HIGHEST_PROTOCOL)
+        tweet = dict(item)
+
+        try: 
+            if detect(tweet["text"])=='en':
+                with open(fname+'.pickle','w') as f:
+                    pickle.dump(tweet, f, protocol=pickle.HIGHEST_PROTOCOL)
+        except:
+            None

@@ -5,6 +5,7 @@ import logging
 import pymongo
 import json
 import os
+import pickle
 
 from TweetScraper.items import Tweet, User
 from TweetScraper.utils import mkdirs
@@ -95,5 +96,5 @@ class SaveToFilePipeline(object):
                 item - a dict like object
                 fname - where to save
         '''
-        with open(fname,'w') as f:
-            json.dump(dict(item), f)
+        with open(fname+'.pickle','w') as f:
+            pickle.dump(dict(item), f, protocol=pickle.HIGHEST_PROTOCOL)

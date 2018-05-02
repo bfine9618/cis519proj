@@ -3,7 +3,7 @@ WEB_URL_REGEX = r"""(?i)\b((?:https?:(?:/{1,3}|[a-z0-9%])|[a-z0-9.\-]+[.](?:com|
 
 # Call with dataframe column
 def regularize_urls(df_col):
-    return df_col.str.replace(WEB_URL_REGEX, ' _url_ ')
+    return df_col.str.replace(WEB_URL_REGEX, '_url_ ')
 
 def regularize_numbers(df_col):
     return df_col.str.replace('\d+', ' _num_ ')

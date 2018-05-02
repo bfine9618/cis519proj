@@ -23,9 +23,9 @@ class TweetScraper(CrawlSpider):
     name = 'TweetScraper'
     allowed_domains = ['twitter.com']
 
-    def __init__(self, query='', lang='', crawl_user=False, top_tweet=False):
+    def __init__(self, query='', lang='en', crawl_user=False, top_tweet=False):
 
-        self.query = query
+        self.query = 'xrp%20OR%20ripple%20-ico%20-token%20-freetoken%20-airdrop%20-airdrops%20-rippleprice_%20-bigpumpgroup%20-bounty%20-binance%20-cryptopricexrp%20-cryptobot%20-coinstats%20-coinpricenow%20-cryptogulp%20-ripplebot1h%20since%3A2018-04-13%20until%3A2018-04-25'
         self.url = "https://twitter.com/i/search/timeline?l={}".format(lang)
 
         if not top_tweet:
@@ -36,7 +36,7 @@ class TweetScraper(CrawlSpider):
         self.crawl_user = crawl_user
 
     def start_requests(self):
-        url = self.url % (quote(self.query), '')
+        url = self.url % (self.query, '')
         yield http.Request(url, callback=self.parse_page)
 
     def parse_page(self, response):
@@ -48,7 +48,7 @@ class TweetScraper(CrawlSpider):
 
         # get next page
         min_position = data['min_position']
-        url = self.url % (quote(self.query), min_position)
+        url = self.url % (self.query, min_position)
         yield http.Request(url, callback=self.parse_page)
 
     def parse_tweets_block(self, html_page):

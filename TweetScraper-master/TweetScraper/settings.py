@@ -16,8 +16,13 @@ ITEM_PIPELINES = {
 }
 
 # settings for where to save data on disk
+<<<<<<< HEAD
 SAVE_TWEET_PATH = './Data/tweet/'
 SAVE_USER_PATH = './Data/goodUser/'
+=======
+SAVE_TWEET_PATH = './Data/newSearchTweets/'
+SAVE_USER_PATH = './Data/users/'
+>>>>>>> d5879e11e8068f6fa12055ca67d5317c3b6860ed
 
 # settings for mongodb
 MONGODB_SERVER = "127.0.0.1"

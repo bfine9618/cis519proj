@@ -1,7 +1,7 @@
 class EmoticonDetector:
     emoticons = {}
 
-    def __init__(self, emoticon_file="data\\emoticons.txt"):
+    def __init__(self, emoticon_file="./emoticons.txt"):
         from pathlib import Path
         content = Path(emoticon_file).read_text()
         positive = True
